@@ -61,7 +61,7 @@ int main(){
 
 
 // Insertion Sort -> Time complexity ->  O(n^2)(worst case,avg case), O(n)(best case)f
-void  insertion_sort(int arr[],int n){
+/*void  insertion_sort(int arr[],int n){
     for(int i=0;i<=n-1;i++){
         int j=i;
         while(j>0 && arr[j-1]>arr[j]){
@@ -83,4 +83,101 @@ int main(){
     for(int i=0;i<n;i++){
         cout<<arr[i]<<" ";
     }
+}
+*/
+
+// Mergesort -> O(n*logn)(all cases)
+/*void merge(int arr[],int low,int mid,int high){
+    vector<int> temp;
+    int left=low;
+    int right=mid+1;
+    while(left<=mid && right<=high){
+        if(arr[left]<arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    while(left<=mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+    while(right<=high){
+        temp.push_back(arr[right]);
+        right++;
+    }
+    for(int i=low;i<=high;i++){
+        arr[i]=temp[i-low];
+    }
+    
+}
+void mergesort(int arr[],int low,int high){
+    if(low==high) return;
+    int mid=(low+high)/2;
+    mergesort(arr,low,mid);
+    mergesort(arr,mid+1,high);
+    merge(arr,low,mid,high);
+}
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    mergesort(arr,0,n-1);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+*/
+
+
+// Quicksort
+int partition(vector<int> &arr,int low,int high){
+    int pivot=arr[low];
+    int i=low;
+    int j=high;
+    while(i<j){
+        while(arr[i]<=pivot && i<=high-1){
+            i++;
+        }
+        while(arr[j]>pivot && j>=low+1){
+            j--;
+        }
+        if(i<j) swap(arr[i],arr[j]);
+    }
+    swap(arr[low],arr[j]);
+    return j;
+}
+void qs(vector<int> &arr,int low,int high){
+    if(low<high){
+        int pIndex=partition(arr,low,high);
+        qs(arr,low,pIndex-1);
+        qs(arr,pIndex+1,high);
+    }
+}
+vector<int> quickSort(vector<int> arr){
+    qs(arr,0,arr.size()-1);
+    return arr;
+}
+int main(){
+    int n;
+    cout<<"Enter n: ";
+    cin>>n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    arr=quickSort(arr);
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
