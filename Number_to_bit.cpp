@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main(){
+
+// number to bits
+/*int main(){
     int a=6;
     string ans="" ;
     while(a>0){ 
@@ -15,4 +17,11 @@ int main(){
         j--;
     }
     cout<<ans;
+}*/
+
+
+// binary to decimal
+int converttoDecimal(string s){
+    int len=s.length()-1;
+    for
 }
